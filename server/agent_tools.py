@@ -43,7 +43,6 @@ def create_order(customer_id: int, name: str,
     try:
         cur = conn.cursor()
 
-        # 2.1: إنشاء order جديد
         cur.execute(
             "INSERT INTO orders (customer_id, created_at, status) VALUES (?, datetime('now'), 'pending')",
             (customer_id,),
@@ -53,12 +52,10 @@ def create_order(customer_id: int, name: str,
         total_items = 0
         result_items = []
 
-        # 2.2: إضافة كل عنصر وتحديث المخزون
         for item in items:
             isbn = item["isbn"]
             qty = int(item["qty"])
 
-            # التحقق من توفر المخزون
             cur.execute("SELECT stock, title FROM books WHERE isbn = ?", (isbn,))
             row = cur.fetchone()
             if row is None:
@@ -69,13 +66,11 @@ def create_order(customer_id: int, name: str,
                     f"Available={row['stock']}, requested={qty}"
                 )
 
-            # إضافة عنصر الطلب
             cur.execute(
                 "INSERT INTO order_items (order_id, isbn, qty) VALUES (?, ?, ?)",
                 (order_id, isbn, qty),
             )
 
-            # تقليل المخزون
             cur.execute(
                 "UPDATE books SET stock = stock - ? WHERE isbn = ?",
                 (qty, isbn),
@@ -160,7 +155,6 @@ def order_status(order_id: int) -> Dict:
     try:
         cur = conn.cursor()
 
-        # معلومات الطلب + العميل
         cur.execute(
             """
             SELECT  o.id, o.created_at, o.status,
@@ -175,7 +169,6 @@ def order_status(order_id: int) -> Dict:
         if order_row is None:
             raise ValueError(f"Order {order_id} not found")
 
-        # العناصر
         cur.execute(
             """
             SELECT oi.isbn, oi.qty,
@@ -229,7 +222,6 @@ def inventory_summary(low_stock_threshold: int = 3) -> Dict:
     try:
         cur = conn.cursor()
 
-        # الكتب ذات المخزون القليل
         cur.execute(
             """
             SELECT isbn, title, author, stock
@@ -241,7 +233,6 @@ def inventory_summary(low_stock_threshold: int = 3) -> Dict:
         )
         low_stock = [dict(row) for row in cur.fetchall()]
 
-        # عدد الكتب حسب مستوى المخزون (optional)
         cur.execute(
             """
             SELECT
