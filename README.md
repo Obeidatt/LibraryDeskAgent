@@ -26,23 +26,23 @@ Built using:
 ## 📦 Project Structure
 
 
-app/
-app.py
-server/
-init.py
-agent_tools.py
-chat_storage.py
-db.py
-library_agent.py
-db/
-schema.sql
-seed.sql
-LibraryAg.db
-prompt/
-system_prompt.txt
-.env.example
-requirements.txt
-README.md
+-app/
+-app.py
+-server/
+-init.py
+-agent_tools.py
+-chat_storage.py
+-db.py
+-library_agent.py
+-db/
+-schema.sql
+-seed.sql
+-LibraryAg.db
+-prompt/
+-system_prompt.txt
+-.env.example
+-requirements.txt
+-README.md
 
 ---
 
@@ -50,8 +50,8 @@ README.md
 
 ### 1. Clone the repo
 
-git clone <repo_url>
-cd <repo_folder>
+-git clone <repo_url>
+-cd <repo_folder>
 
 
 
@@ -64,11 +64,11 @@ cd <repo_folder>
 
 ## 🤖 Using Ollama (Local LLM)
 
-Download Ollama:
-https://ollama.com/download
+-Download Ollama:
+-https://ollama.com/download
 
-Then pull a model:
-ollama pull llama3
+-Then pull a model:
+-ollama pull llama3
 
 
 
@@ -76,10 +76,10 @@ ollama pull llama3
 
 ## ▶️ Run the App
 
-Launch UI:
-streamlit run app.py
-App opens at:
-http://localhost:8501
+-Launch UI:
+-streamlit run app.py
+-App opens at:
+-http://localhost:8501
 
 ---
 
@@ -97,9 +97,9 @@ http://localhost:8501
 ---
 
 ## 📝 Example Prompts
-Find books written by John
-Add 3 copies to ISBN 978000000002
-Create order for customer Ahmed email ah@ex.com 3 copies of ISBN 978000000001
+-Find books written by John
+-Add 3 copies to ISBN 978000000002
+-Create order for customer Ahmed email ah@ex.com 3 copies of ISBN 978000000001
 
 
 ---
