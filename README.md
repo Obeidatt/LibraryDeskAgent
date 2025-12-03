@@ -70,11 +70,6 @@ https://ollama.com/download
 Then pull a model:
 ollama pull llama3
 
----
-
-## 🗄️ Database Setup
-
-Create fresh DB:
 
 
 ---
