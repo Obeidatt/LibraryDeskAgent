@@ -1,0 +1,7 @@
+streamlit
+langchain
+langchain-core
+langchain-community
+langchain-ollama
+sqlite3-binary
+python-dotenv
