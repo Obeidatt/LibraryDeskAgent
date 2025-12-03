@@ -13,8 +13,7 @@ def _now_iso() -> str:
 # ====== sessions ======
 def get_next_session_id() -> int:
     """
-    يرجّع session_id جديد (max + 1) بناءً على جدول messages.
-    لو ما فيش جلسات، يرجع 1.
+    Return new session id based on messages table
     """
     conn = get_connection()
     try:
@@ -28,8 +27,7 @@ def get_next_session_id() -> int:
 
 def list_sessions() -> List[Dict[str, Any]]:
     """
-    يرجّع قائمة الجلسات الموجودة من جدول messages.
-    كل عنصر: {session_id, started_at, updated_at}
+    return list of sessions from messages table
     """
     conn = get_connection()
     try:
@@ -54,7 +52,6 @@ def list_sessions() -> List[Dict[str, Any]]:
 # ====== messages ======
 def load_messages(session_id: int) -> List[Dict[str, str]]:
     """
-    يرجّع رسائل جلسة معيّنة بالشكل:
     [{ "role": "user" | "assistant", "content": "..." }, ...]
     """
     conn = get_connection()
@@ -77,8 +74,8 @@ def load_messages(session_id: int) -> List[Dict[str, str]]:
 
 def save_message(session_id: int, role: str, content: str) -> None:
     """
-    يحفظ رسالة في جدول messages.
-    يفترض إن جدول messages فيه الأعمدة:
+    save the message into messages.
+    messages:
         id INTEGER PK,
         session_id INTEGER,
         role TEXT,
@@ -111,8 +108,8 @@ def log_tool_call(
     result: Any,
 ) -> None:
     """
-    يسجّل استدعاء tool في جدول tool_calls.
-    يفترض إن جدول tool_calls فيه الأعمدة:
+    record any tool call in tool_calls.
+    tool_calls:
         id INTEGER PK,
         session_id INTEGER,
         name TEXT,
